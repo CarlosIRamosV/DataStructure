@@ -1,5 +1,3 @@
-import gradle.kotlin.dsl.accessors._72efc76fad8c8cf3476d335fb6323bde.implementation
-
 plugins {
     id("com.github.johnrengelman.shadow")
     id("me.CarlosIRamosV.java-common-conventions")
@@ -28,5 +26,7 @@ tasks {
     }
     shadowJar {
         manifest.inheritFrom(jar.get().manifest)
+        destinationDirectory.set(file("../build/libs"))
+        archiveFileName.set(project.name + ".jar")
     }
 }
