@@ -5,11 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Ui {
-    private TDAVector tdaVector; // <--- This is the only change
     public JPanel contentPane;
+    private final TDAVector tdaVector;
     private JButton inputButtonValorFinal;
     private JTextField inputValorFinal;
-    private JLabel alertasValorFinal;
     private JButton eliminarElementoFinalButton;
     private JPanel debugPanel;
     private JLabel debugViewNumElem;
@@ -18,7 +17,7 @@ public class Ui {
 
 
     public Ui() {
-        tdaVector = new TDAVector(); // <--- This is the only change
+        tdaVector = new TDAVector();
         inputButtonValorFinal.addActionListener(addElemento());
         inputValorFinal.addActionListener(addElemento());
         eliminarElementoFinalButton.addActionListener(deleteElemento());
@@ -32,7 +31,6 @@ public class Ui {
                     inputValorFinal.setText("");
                     debugViewVector.setText(tdaVector.getVector());
                     debugViewNumElem.setText(tdaVector.getNumElem());
-                    //alertasValorFinal.setText("Elemento agregado correctamente");
                     action.setText("Se agrego el valor: " + tdaVector.getLastElement());
                 } else {
                     action.setText("Error: El vector esta llano");
@@ -45,12 +43,10 @@ public class Ui {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String lastElement = tdaVector.getLastElement();
                 if (tdaVector.eliminarElementoFinal()) {
                     debugViewVector.setText(tdaVector.getVector());
                     debugViewNumElem.setText(tdaVector.getNumElem());
-                    //alertasValorFinal.setText("Elemento eliminado correctamente");
-                    action.setText("Se elimino el valor: " + lastElement);
+                    action.setText("Se elimino el valor: " + tdaVector.getLasDeleteElement());
                 } else {
                     action.setText("Error: El vector esta vacio");
                 }

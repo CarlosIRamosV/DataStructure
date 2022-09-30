@@ -20,11 +20,15 @@ public class TDAVector {
 
     public String getVector() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < numElem; i++) {
-            stringBuilder.append(vector[i]);
-            if (i != (numElem-1)) {
-                stringBuilder.append(" ");
+        if (numElem > 0) {
+            for (int i = 0; i < numElem; i++) {
+                stringBuilder.append(vector[i]);
+                if (i != (numElem - 1)) {
+                    stringBuilder.append(" ");
+                }
             }
+        } else {
+            stringBuilder.append("El vector esta vacio");
         }
         return String.valueOf(stringBuilder);
     }
@@ -35,13 +39,20 @@ public class TDAVector {
 
     public String getLastElement() {
         if (numElem > 0) {
-            return String.valueOf(vector[numElem-1]);
+            return String.valueOf(vector[numElem - 1]);
         }
         return "";
     }
+
+    public String getLasDeleteElement() {
+        if (numElem >= 0) {
+            return String.valueOf(vector[numElem]);
+        }
+        return "";
+    }
+
     public boolean eliminarElementoFinal() {
         if (numElem > 0) {
-            vector[numElem-1] = 0;
             numElem--;
             return true;
         }
