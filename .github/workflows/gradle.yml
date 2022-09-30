@@ -1,10 +1,15 @@
 name: Java CI with Gradle
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'Project name'
+        required: true
+        default: 'all'
+        options:
+          - all
+          - app
 
 permissions:
   contents: read
@@ -28,8 +33,13 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     
-    - name: Execute Gradle build
+    - if: ${{ github.event.inputs.project == 'all' }}
+      name: Execute Gradle build
       run: ./gradlew build
+
+    - if: ${{ github.event.inputs.project != 'all' }}
+      name: Execute Gradle build
+      run: ./gradlew :${{ github.event.inputs.project }}:build
       
     - uses: actions/upload-artifact@v3
       with:
