@@ -29,13 +29,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew :$PROJECT:build
-        env:
-          PROJECT: ${{ github.event.inputs.project }}
+        run: ./gradlew :${{ github.event.inputs.project }}:build
 
       - uses: actions/upload-artifact@v3
         with:
-          name: $PROJECT
+          name: ${{ github.event.inputs.project }}
           path: build/libs/
-        env:
-          PROJECT: ${{ github.event.inputs.project }}
