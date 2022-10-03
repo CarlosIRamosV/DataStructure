@@ -27,13 +27,23 @@ public class Ui {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tdaVector.agregarElementoFinal(Integer.parseInt(inputValorFinal.getText()))) {
-                    inputValorFinal.setText("");
-                    debugViewVector.setText(tdaVector.getVector());
-                    debugViewNumElem.setText(tdaVector.getNumElem());
-                    action.setText("Se agrego el valor: " + tdaVector.getLastElement());
-                } else {
-                    action.setText("Error: El vector esta llano");
+                try {
+                    if (tdaVector.agregarElementoFinal(Integer.parseInt(inputValorFinal.getText()))) {
+                        inputValorFinal.setText("");
+                        debugViewVector.setText(tdaVector.getVector());
+                        debugViewNumElem.setText(tdaVector.getNumElem());
+                        action.setText("Se agrego el valor: " + tdaVector.getLastElement());
+                    } else {
+                        action.setText("Error: El vector esta llano");
+                    }
+                } catch (NumberFormatException ex) {
+                    if (inputValorFinal.getText().equals("")) {
+                        action.setText("Error: El valor esta vacio");
+                    } else if (inputValorFinal.getText().length() > 10) {
+                        action.setText("Error: El valor es muy grande");
+                    } else {
+                        action.setText("Error: El valor no es un numero o no es un entero");
+                    }
                 }
             }
         };
