@@ -14,6 +14,7 @@ public class Ui {
     private JLabel debugViewNumElem;
     private JLabel debugViewVector;
     private JLabel action;
+    private JTextField addElemento;
 
 
     public Ui() {
@@ -21,6 +22,7 @@ public class Ui {
         inputButtonValorFinal.addActionListener(addElemento());
         inputValorFinal.addActionListener(addElemento());
         eliminarElementoFinalButton.addActionListener(deleteElemento());
+        addElemento.addActionListener(addOrdenElemento());
     }
 
     private ActionListener addElemento() {
@@ -57,6 +59,21 @@ public class Ui {
                     debugViewVector.setText(tdaVector.getVector());
                     debugViewNumElem.setText(tdaVector.getNumElem());
                     action.setText("Se elimino el valor: " + tdaVector.getLasDeleteElement());
+                } else {
+                    action.setText("Error: El vector esta vacio");
+                }
+
+            }
+        };
+    }
+
+    private ActionListener addOrdenElemento() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tdaVector.addElement(Integer.parseInt(addElemento.getText()))) {
+                    debugViewVector.setText(tdaVector.getVector());
+                    addElemento.setText("");
                 } else {
                     action.setText("Error: El vector esta vacio");
                 }

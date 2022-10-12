@@ -5,7 +5,7 @@ public class TDAVector {
     int numElem;
 
     TDAVector() {
-        vector = new int[16];
+        vector = new int[90];
         numElem = 0;
     }
 
@@ -42,6 +42,26 @@ public class TDAVector {
             return String.valueOf(vector[numElem - 1]);
         }
         return "";
+    }
+
+    public boolean addElement(int dato) {
+        if (numElem < vector.length) {
+            for (int i = numElem; i >= 0; i--) {
+                if (i == 0) {
+                    vector[i] = dato;
+                    numElem++;
+                    return true;
+                } else {
+                    vector[i+1] = vector[i];
+                    if (vector[i-1] <= dato) {
+                        vector[i] = dato;
+                        numElem++;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public String getLasDeleteElement() {
