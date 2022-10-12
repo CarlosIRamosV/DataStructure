@@ -26,16 +26,16 @@ public class TDAVector {
         return false;
     }
 
-    public boolean addByOrder(int value) {
+    public boolean addByOrder(int dato) {
         if (numElem < vector.length) {
-            int i = 0;
-            while (i < numElem && vector[i] < value) {
-                i++;
+            int position = 0;
+            while (position < numElem && vector[position] < dato) {
+                position++;
             }
-            for (int j = numElem; j > i; j--) {
-                vector[j] = vector[j - 1];
+            for (int i = numElem; i > position; i--) {
+                vector[i] = vector[i - 1];
             }
-            vector[i] = value;
+            vector[position] = dato;
             numElem++;
             return true;
         }
