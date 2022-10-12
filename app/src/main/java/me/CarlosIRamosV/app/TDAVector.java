@@ -1,4 +1,4 @@
-package me.CarlosIRamosV.app;
+package me.CarlosIRamosV.TDAVector;
 
 public class TDAVector {
     int[] vector;
