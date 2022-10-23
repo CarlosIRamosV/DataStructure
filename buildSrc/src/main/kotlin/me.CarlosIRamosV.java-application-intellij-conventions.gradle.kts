@@ -9,10 +9,10 @@ repositories {
 }
 
 dependencies {
-    implementation("com.jetbrains.intellij.java:java-gui-forms-rt:222.4167.33")
+    implementation("com.jetbrains.intellij.java:java-gui-forms-rt:222.4345.24")
 }
 
 intellij {
-    version.set("2022.2.2")
+    version.set("2022.2.3")
     type.set("IU")
 }
