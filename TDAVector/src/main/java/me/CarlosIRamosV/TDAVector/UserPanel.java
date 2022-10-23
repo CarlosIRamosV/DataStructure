@@ -1,5 +1,7 @@
 package me.CarlosIRamosV.TDAVector;
 
+import me.CarlosIRamosV.TDAVector.interfaces.UserInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +9,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
-public class Ui {
+/**
+ * Clase que implementa la interfaz gráfica del TDA Vector
+ *
+ * @author Carlos Ramos
+ * @version 1.0
+ * @see UserInterface
+ */
+public class UserPanel implements UserInterface {
     private final TDAVector tdaVector;
     public JPanel contentPane;
     private JPanel panelValorFinal;
@@ -21,8 +30,12 @@ public class Ui {
     private JLabel ActionStatus;
     private JLabel vectorView;
     private JButton eliminarValorFinalButton;
+    private JLabel vectorViewOrdenado;
+    private JLabel vectorViewInverso;
+    private JButton burbujaButton;
+    private JButton burbujaButtonNew;
 
-    public Ui() {
+    public UserPanel() {
         tdaVector = new TDAVector();
         // Placeholder
         String textPlaceholder = "Ingrese un numero entero";
@@ -43,12 +56,26 @@ public class Ui {
         eliminarValorFinalButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (tdaVector.deleteAtTheEnd()) {
+                if (tdaVector.eliminarElementoFinal()) {
                     ActionStatus.setText("Se elimino el valor final");
                 } else {
                     ActionStatus.setText("No se pudo eliminar el valor final");
                 }
-                vectorView.setText(tdaVector.getVector());
+                updateVectorView();
+            }
+        });
+        burbujaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tdaVector.burbuja();
+                updateVectorView();
+            }
+        });
+        burbujaButtonNew.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tdaVector.burbujaMejorado();
+                updateVectorView();
             }
         });
     }
@@ -86,10 +113,10 @@ public class Ui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (tdaVector.addAtTheEnd(Integer.parseInt(inputValorFinal.getText()))) {
+                    if (tdaVector.agregarElementoFinal(Integer.parseInt(inputValorFinal.getText()))) {
                         ActionStatus.setText("Se agrego el valor: " + inputValorFinal.getText());
                         inputValorFinal.setText("");
-                        vectorView.setText(tdaVector.getVector());
+                        updateVectorView();
                     } else {
                         ActionStatus.setText("Error: El vector esta lleno");
                     }
@@ -105,10 +132,10 @@ public class Ui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (tdaVector.addByOrder(Integer.parseInt(inputValorPorOrden.getText()))) {
+                    if (tdaVector.insertarElemento(Integer.parseInt(inputValorPorOrden.getText()))) {
                         ActionStatus.setText("Se agrego el valor: " + inputValorPorOrden.getText());
                         inputValorPorOrden.setText("");
-                        vectorView.setText(tdaVector.getVector());
+                        updateVectorView();
                     } else {
                         ActionStatus.setText("Error: El vector esta lleno");
                     }
@@ -117,5 +144,11 @@ public class Ui {
                 }
             }
         };
+    }
+
+    private void updateVectorView() {
+        vectorView.setText(tdaVector.getVector());
+        vectorViewOrdenado.setText(tdaVector.getVector());
+        vectorViewInverso.setText(tdaVector.getVector());
     }
 }
