@@ -1,4 +1,5 @@
 # TDAVector
+Para compilar y ejecutar el proyecto, ejecuta el comando `./gradlew TDAVector:run` en la raíz del repositorio.
 ## Clase TDAVector
 ### Atributos
 * `int[] vector` almacena los elementos del vector.
