@@ -20,7 +20,7 @@ public class TDAVector implements TDAVectorInterface {
      * Constructor por defecto de la clase TDAVector
      */
     TDAVector() {
-        vector = new int[16];
+        vector = new int[32];
         numElem = 0;
     }
 
@@ -100,9 +100,8 @@ public class TDAVector implements TDAVectorInterface {
             position++;
         }
         if (position < numElem) {
-            for (int i = position; i < numElem - 1; i++) {
+            for (int i = position; i < numElem - 1; i++)
                 vector[i] = vector[i + 1];
-            }
             numElem--;
             return true;
         }
@@ -137,10 +136,27 @@ public class TDAVector implements TDAVectorInterface {
     }
 
     /**
+     * Ordena el vector de forma descendente
+     */
+    @Override
+    public void burbujaInvertido() {
+        int aux;
+        for (int i = 0; i < numElem - 1; i++) {
+            for (int j = 0; j < numElem - 1; j++) {
+                if (vector[j] < vector[j + 1]) {
+                    aux = vector[j];
+                    vector[j] = vector[j + 1];
+                    vector[j + 1] = aux;
+                }
+            }
+        }
+    }
+
+    /**
      * Ordena el vector de forma ascendente de forma más eficiente
      */
     @Override
-    public void burbujaMejorado() {
+    public void shell() {
         int intervalo, i, j, k, aux;
         intervalo = numElem / 2;
         while (intervalo > 0) {
@@ -160,6 +176,56 @@ public class TDAVector implements TDAVectorInterface {
             }
             intervalo = intervalo / 2;
         }
+    }
+
+    /**
+     * Ordena el vector de forma descendente de forma más eficiente
+     */
+    @Override
+    public void shellInvertido() {
+        int intervalo, i, j, k, aux;
+        intervalo = numElem / 2;
+        while (intervalo > 0) {
+            for (i = intervalo; i < numElem; i++) {
+                j = i - intervalo;
+                while (j >= 0) {
+                    k = j + intervalo;
+                    if (vector[j] >= vector[k]) {
+                        j = -1;
+                    } else {
+                        aux = vector[j];
+                        vector[j] = vector[k];
+                        vector[k] = aux;
+                        j -= intervalo;
+                    }
+                }
+            }
+            intervalo = intervalo / 2;
+        }
+    }
+
+    /**
+     * Busca las posiciones donde se encuentra cierto número
+     *
+     * @param elemento numero entero a buscar
+     * @return posiciones donde se encuentra el elemento
+     */
+    @Override
+    public String buscarElemento(int elemento) {
+        StringBuilder posiciones = new StringBuilder("[");
+        boolean started = false;
+        for (int i = 0; i < numElem; i++) {
+            if (vector[i] == elemento) {
+                if (started)
+                    posiciones.append(", ");
+                else
+                    started = true;
+                posiciones.append(i);
+            }
+
+        }
+        posiciones.append("]");
+        return posiciones.toString();
     }
 }
 

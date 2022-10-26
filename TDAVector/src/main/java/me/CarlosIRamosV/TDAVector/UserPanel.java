@@ -30,10 +30,10 @@ public class UserPanel implements UserInterface {
     private JLabel ActionStatus;
     private JLabel vectorView;
     private JButton eliminarValorFinalButton;
-    private JLabel vectorViewOrdenado;
-    private JLabel vectorViewInverso;
     private JButton burbujaButton;
-    private JButton burbujaButtonNew;
+    private JButton shellButton;
+    private JTextField eliminarElementoInput;
+    private JTextField inputBuscarElemento;
 
     public UserPanel() {
         tdaVector = new TDAVector();
@@ -42,9 +42,13 @@ public class UserPanel implements UserInterface {
 
         enablePlaceholder(inputValorFinal, textPlaceholder);
         enablePlaceholder(inputValorPorOrden, textPlaceholder);
+        enablePlaceholder(eliminarElementoInput, textPlaceholder);
+        enablePlaceholder(inputBuscarElemento, textPlaceholder);
 
         inputValorFinal.addFocusListener(placeholder(inputValorFinal, textPlaceholder));
         inputValorPorOrden.addFocusListener(placeholder(inputValorPorOrden, textPlaceholder));
+        eliminarElementoInput.addFocusListener(placeholder(eliminarElementoInput, textPlaceholder));
+        inputBuscarElemento.addFocusListener(placeholder(inputBuscarElemento, textPlaceholder));
 
         // Input valor al final
         inputValorFinal.addActionListener(inputValorFinalActionListener());
@@ -53,30 +57,26 @@ public class UserPanel implements UserInterface {
         // Input valor por orden
         inputValorPorOrden.addActionListener(inputValorByOrderActionListener());
         inputButtonValorPorOrden.addActionListener(inputValorByOrderActionListener());
-        eliminarValorFinalButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (tdaVector.eliminarElementoFinal()) {
-                    ActionStatus.setText("Se elimino el valor final");
-                } else {
-                    ActionStatus.setText("No se pudo eliminar el valor final");
-                }
-                updateVectorView();
+        eliminarValorFinalButton.addActionListener(e -> {
+            if (tdaVector.eliminarElementoFinal()) {
+                ActionStatus.setText("Se elimino el valor final");
+            } else {
+                ActionStatus.setText("No se pudo eliminar el valor final");
             }
+            updateVectorView();
         });
-        burbujaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tdaVector.burbuja();
-                updateVectorView();
-            }
+        burbujaButton.addActionListener(e -> {
+            tdaVector.burbuja();
+            updateVectorView();
         });
-        burbujaButtonNew.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tdaVector.burbujaMejorado();
-                updateVectorView();
-            }
+        shellButton.addActionListener(e -> {
+            tdaVector.shell();
+            updateVectorView();
+        });
+        eliminarElementoInput.addActionListener(eliminarElemento());
+        inputBuscarElemento.addActionListener(e -> {
+            ActionStatus.setText(tdaVector.buscarElemento(Integer.parseInt(inputBuscarElemento.getText())));
+            inputBuscarElemento.setText("");
         });
     }
 
@@ -128,27 +128,38 @@ public class UserPanel implements UserInterface {
     }
 
     private ActionListener inputValorByOrderActionListener() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    if (tdaVector.insertarElemento(Integer.parseInt(inputValorPorOrden.getText()))) {
-                        ActionStatus.setText("Se agrego el valor: " + inputValorPorOrden.getText());
-                        inputValorPorOrden.setText("");
-                        updateVectorView();
-                    } else {
-                        ActionStatus.setText("Error: El vector esta lleno");
-                    }
-                } catch (NumberFormatException exception) {
-                    ActionStatus.setText("Error: El valor ingresado no es un numero entero");
+        return e -> {
+            try {
+                if (tdaVector.insertarElemento(Integer.parseInt(inputValorPorOrden.getText()))) {
+                    ActionStatus.setText("Se agrego el valor: " + inputValorPorOrden.getText());
+                    inputValorPorOrden.setText("");
+                    updateVectorView();
+                } else {
+                    ActionStatus.setText("Error: El vector esta lleno");
                 }
+            } catch (NumberFormatException exception) {
+                ActionStatus.setText("Error: El valor ingresado no es un numero entero");
+            }
+        };
+    }
+
+    private ActionListener eliminarElemento() {
+        return e -> {
+            try {
+                if (tdaVector.eliminarElemento(Integer.parseInt(eliminarElementoInput.getText()))) {
+                    ActionStatus.setText("Se elimino el valor: " + eliminarElementoInput.getText());
+                    eliminarElementoInput.setText("");
+                    updateVectorView();
+                } else {
+                    ActionStatus.setText("Error: valor no encontrado");
+                }
+            } catch (NumberFormatException exception) {
+                ActionStatus.setText("Error: El valor ingresado no es un numero entero");
             }
         };
     }
 
     private void updateVectorView() {
         vectorView.setText(tdaVector.getVector());
-        vectorViewOrdenado.setText(tdaVector.getVector());
-        vectorViewInverso.setText(tdaVector.getVector());
     }
 }
