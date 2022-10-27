@@ -1,5 +1,5 @@
 plugins {
-    id("me.CarlosIRamosV.java-application-intellij-conventions")
+    id("me.CarlosIRamosV.java-application-conventions-intellij")
 }
 
 tasks.compileJava {
