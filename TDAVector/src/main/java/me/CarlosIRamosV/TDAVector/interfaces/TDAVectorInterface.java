@@ -18,9 +18,12 @@ public interface TDAVectorInterface {
     String getVector();
 
     void burbuja();
+
     void burbujaInvertido();
 
     void shell();
+
     void shellInvertido();
+
     String buscarElemento(int elemento);
 }

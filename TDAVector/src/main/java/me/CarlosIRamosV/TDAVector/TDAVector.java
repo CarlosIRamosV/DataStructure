@@ -222,10 +222,8 @@ public class TDAVector implements TDAVectorInterface {
                     started = true;
                 posiciones.append(i);
             }
-
         }
         posiciones.append("]");
         return posiciones.toString();
     }
 }
-
