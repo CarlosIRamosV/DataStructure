@@ -74,12 +74,10 @@ public class TDAVector implements TDAVectorInterface {
     public boolean insertarElemento(int elemento) {
         if (numElem < vector.length) {
             int position = 0;
-            while (position < numElem && vector[position] < elemento) {
+            while (position < numElem && vector[position] < elemento)
                 position++;
-            }
-            for (int i = numElem; i > position; i--) {
+            for (int i = numElem; i > position; i--)
                 vector[i] = vector[i - 1];
-            }
             vector[position] = elemento;
             numElem++;
             return true;
@@ -225,5 +223,11 @@ public class TDAVector implements TDAVectorInterface {
         }
         posiciones.append("]");
         return posiciones.toString();
+    }
+
+    public void deleteFirst() {
+        for (int i = 0; i < numElem - 1; i++)
+            vector[i] = vector[i + 1];
+        numElem--;
     }
 }
