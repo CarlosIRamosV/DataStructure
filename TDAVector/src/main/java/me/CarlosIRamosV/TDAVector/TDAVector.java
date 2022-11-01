@@ -20,7 +20,7 @@ public class TDAVector implements TDAVectorInterface {
      * Constructor por defecto de la clase TDAVector
      */
     TDAVector() {
-        vector = new int[6];
+        vector = new int[32];
         numElem = 0;
     }
 
@@ -113,7 +113,7 @@ public class TDAVector implements TDAVectorInterface {
      */
     @Override
     public String getVector() {
-        return Arrays.toString(Arrays.copyOf(vector, numElem+1));
+        return Arrays.toString(Arrays.copyOf(vector, numElem));
     }
 
     /**
@@ -225,10 +225,7 @@ public class TDAVector implements TDAVectorInterface {
         return posiciones.toString();
     }
 
-    /**
-     * Este método elimina el primer elemento del vector reemplazando cada elemento por el siguiente
-     * @return
-     */
+
     public boolean eliminarPrimerElemento() {
         if (numElem > 0) {
             for (int i = 0; i < (numElem - 1); i++)
