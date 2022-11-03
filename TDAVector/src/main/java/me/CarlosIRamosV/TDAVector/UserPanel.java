@@ -34,6 +34,8 @@ public class UserPanel implements UserInterface {
     private JButton shellButton;
     private JTextField eliminarElementoInput;
     private JTextField inputBuscarElemento;
+    private JButton EliminarValorInicialButton;
+    private JTextField inputInicioVector;
 
     public UserPanel() {
         tdaVector = new TDAVector();
@@ -77,6 +79,23 @@ public class UserPanel implements UserInterface {
         inputBuscarElemento.addActionListener(e -> {
             ActionStatus.setText(tdaVector.buscarElemento(Integer.parseInt(inputBuscarElemento.getText())));
             inputBuscarElemento.setText("");
+        });
+        EliminarValorInicialButton.addActionListener(e -> {
+            if (tdaVector.eliminarPrimerElemento()) {
+                ActionStatus.setText("Se elimino el valor inicial");
+            } else {
+                ActionStatus.setText("No se pudo eliminar el valor inicial");
+            }
+            updateVectorView();
+        });
+        inputInicioVector.addActionListener(e -> {
+            if (tdaVector.agregarPrimerElemento(Integer.parseInt(inputInicioVector.getText()))) {
+                inputInicioVector.setText("");
+                ActionStatus.setText("Se agrego el primer elemento");
+            } else {
+                ActionStatus.setText("No se pudo agregar el primer elemento");
+            }
+            updateVectorView();
         });
     }
 
