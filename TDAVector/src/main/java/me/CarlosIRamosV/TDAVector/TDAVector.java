@@ -74,8 +74,7 @@ public class TDAVector implements TDAVectorInterface {
     public boolean insertarElemento(int elemento) {
         if (numElem < vector.length) {
             int position = 0;
-            while (position < numElem && vector[position] < elemento)
-                position++;
+            while (position < numElem && vector[position] < elemento) position++;
             for (int i = numElem; i > position; i--)
                 vector[i] = vector[i - 1];
             vector[position] = elemento;
@@ -203,6 +202,35 @@ public class TDAVector implements TDAVectorInterface {
     }
 
     /**
+     * Ordena el vector de forma más eficiente mediante el algoritmo de ordenamiento QuickSort
+     */
+    private void qS(byte primero, byte ultimo) {
+        byte i = primero, j = ultimo;
+        int pivote = vector[(primero + ultimo) / 2];
+        int aux;
+        do {
+            while (vector[i] < pivote) i++;
+            while (vector[j] > pivote) j--;
+            if (i <= j) {
+                aux = vector[i];
+                vector[i] = vector[j];
+                vector[j] = aux;
+                i++;
+                j--;
+            }
+        } while (i <= j);
+        if (primero < j) qS(primero, j);
+        if (i < ultimo) qS(i, ultimo);
+    }
+
+    public boolean quickSort() {
+        if (numElem > 0) {
+            qS((byte) 0, (byte) (numElem - 1));
+            return true;
+        } else return false;
+    }
+
+    /**
      * Busca las posiciones donde se encuentra cierto número
      *
      * @param elemento numero entero a buscar
@@ -214,10 +242,8 @@ public class TDAVector implements TDAVectorInterface {
         boolean started = false;
         for (int i = 0; i < numElem; i++) {
             if (vector[i] == elemento) {
-                if (started)
-                    posiciones.append(", ");
-                else
-                    started = true;
+                if (started) posiciones.append(", ");
+                else started = true;
                 posiciones.append(i);
             }
         }
@@ -225,6 +251,31 @@ public class TDAVector implements TDAVectorInterface {
         return posiciones.toString();
     }
 
+    public int buscarElementoMetodo1(int elemento) {
+        for (int i = 0; i < numElem; i++) {
+            if (vector[i] == elemento) return i;
+        }
+        return -1;
+    }
+
+    public int buscarElementoMetodo2(int elemento) {
+        int position = 0;
+        for (int i = 0; i < numElem; i++) {
+            if (vector[i] == elemento) position = i;
+        }
+        return position;
+    }
+
+    public int buscarElementoMetodo3(int elemento) {
+        boolean encontrado = false;
+        int pos = 0;
+        while (pos < numElem && !encontrado) {
+            if (vector[pos] == elemento) encontrado = true;
+            else pos++;
+        }
+        if (encontrado) return pos;
+        else return -1;
+    }
 
     public boolean eliminarPrimerElemento() {
         if (numElem > 0) {
