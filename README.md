@@ -11,7 +11,9 @@ Es recomendable instalar [IntelliJ IDEA](https://www.jetbrains.com/idea/) para p
 * Si quieres ejecutar un ejercicio en concreto, ejecuta el comando `./gradlew actividad:run` donde `actividad` es el nombre del ejercicio o proyecto que quieres ejecutar.
 
 ## Proyectos
-
 * [TDAVector](./TDAVector/README.md)
 
-## Ejercicios
+## Opciones de descarga
+* [Repositorio de GitHub](https://github.com/CarlosIRamosV/DataStructure)
+* [Archivo comprimido](https://github.com/CarlosIRamosV/DataStructure/archive/refs/heads/main.zip)
+* Clona el repositorio con el comando `git clone git@github.com:CarlosIRamosV/DataStructure.git` en la terminal.

@@ -18,7 +18,5 @@ Para compilar y ejecutar el proyecto, ejecuta el comando `./gradlew TDAVector:ru
 * `shell()` ordena el vector de forma ascendente mediante el método de Shell.
 * `shellInvertido()` ordena el vector de forma descendente mediante el método de Shell.
 * `buscarElemento(int elemento)` busca un elemento en el vector y devuelve su posición.
-
-## Clase UserPanel
-
-En Construcción 🚧
+* `agregarPrimerElemento(int elemento)` agrega un elemento al principio del vector.
+* `eliminarPrimerElemento()` elimina el primer elemento del vector.

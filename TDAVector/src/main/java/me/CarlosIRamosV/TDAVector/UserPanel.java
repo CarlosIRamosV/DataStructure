@@ -1,7 +1,5 @@
 package me.CarlosIRamosV.TDAVector;
 
-import me.CarlosIRamosV.TDAVector.interfaces.UserInterface;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +12,8 @@ import java.awt.event.FocusEvent;
  *
  * @author Carlos Ramos
  * @version 1.0
- * @see UserInterface
  */
-public class UserPanel implements UserInterface {
+public class UserPanel {
     private final TDAVector tdaVector;
     public JPanel contentPane;
     private JPanel panelValorFinal;
