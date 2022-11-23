@@ -3,6 +3,7 @@ package me.CarlosIRamosV.TDAVector;
 import me.CarlosIRamosV.TDAVector.interfaces.TDAVectorInterface;
 
 import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * Clase que implementa el TDA Vector
@@ -208,13 +209,19 @@ public class TDAVector implements TDAVectorInterface {
         byte i = primero, j = ultimo;
         int pivote = vector[(primero + ultimo) / 2];
         int aux;
+        System.out.println("primero: "+ i + " ultimo:" + j + " pivote:" + pivote);
+        System.out.println(Arrays.toString(vector));
+
         do {
             while (vector[i] < pivote) i++;
             while (vector[j] > pivote) j--;
             if (i <= j) {
+                System.out.println("i: "+ i + " j:" + j);
+                System.out.println("Antes: " + Arrays.toString(vector));
                 aux = vector[i];
                 vector[i] = vector[j];
                 vector[j] = aux;
+                System.out.println("Despues: " + Arrays.toString(vector));
                 i++;
                 j--;
             }

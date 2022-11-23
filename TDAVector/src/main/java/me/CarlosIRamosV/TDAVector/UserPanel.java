@@ -69,7 +69,7 @@ public class UserPanel {
             updateVectorView();
         });
         shellButton.addActionListener(e -> {
-            tdaVector.shell();
+            tdaVector.quickSort();
             updateVectorView();
         });
         eliminarElementoInput.addActionListener(eliminarElemento());
