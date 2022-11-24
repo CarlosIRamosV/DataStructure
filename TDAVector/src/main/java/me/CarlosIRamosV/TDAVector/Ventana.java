@@ -13,7 +13,7 @@ import java.awt.event.FocusEvent;
  * @author Carlos Ramos
  * @version 1.0
  */
-public class UserPanel {
+public class Ventana {
     private final TDAVector tdaVector;
     public JPanel contentPane;
     private JPanel panelValorFinal;
@@ -34,7 +34,7 @@ public class UserPanel {
     private JButton EliminarValorInicialButton;
     private JTextField inputInicioVector;
 
-    public UserPanel() {
+    public Ventana() {
         tdaVector = new TDAVector();
         // Placeholder
         String textPlaceholder = "Ingrese un numero entero";
@@ -95,6 +95,7 @@ public class UserPanel {
             updateVectorView();
         });
     }
+
 
     private FocusAdapter placeholder(JTextField jTextField, String placeholder) {
         return new FocusAdapter() {

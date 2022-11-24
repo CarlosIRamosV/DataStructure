@@ -9,48 +9,28 @@ import me.CarlosIRamosV.TDAListas.interfaces.TDAListasInterface;
  * @version 1.0
  * @see TDAListasInterface
  */
-@SuppressWarnings({"unused", "DuplicatedCode"})
+@SuppressWarnings({"NonAsciiCharacters", "unused", "DuplicatedCode"})
 public class TDAListas implements TDAListasInterface {
     private Nodo inicio;
-    private Nodo aux;
 
     public TDAListas() {
         setInicio(null);
-        setAux(null);
     }
 
     public TDAListas(Nodo inicio) {
         setInicio(inicio);
-        setAux(null);
     }
 
     public TDAListas(Nodo inicio, Nodo aux) {
         setInicio(inicio);
-        setAux(aux);
     }
 
     public void setInicio(Nodo inicio) {
         this.inicio = inicio;
     }
 
-    public void setAux(Nodo aux) {
-        this.aux = aux;
-    }
-
     public Nodo getInicio() {
         return inicio;
-    }
-
-    public Nodo getAux() {
-        return aux;
-    }
-
-    public void siguiente() {
-        setAux(getAux().getSiguiente());
-    }
-
-    public void primero() {
-        setAux(getInicio());
     }
 
     public void insertar(int info) {
@@ -59,45 +39,75 @@ public class TDAListas implements TDAListasInterface {
         } else {
             setInicio(new Nodo(info, getInicio()));
         }
-        setAux(getInicio());
     }
 
-    public void eliminarUltimo() {
+    public void eliminarFinal() {
         if (getInicio() != null) {
             if (getInicio().getSiguiente() == null) {
                 setInicio(null);
             } else {
-                primero();
-                while (getAux().getSiguiente().getSiguiente() != null) {
-                    siguiente();
+                Nodo aux = getInicio();
+                while (aux.getSiguiente().getSiguiente() != null) {
+                    aux = aux.getSiguiente();
                 }
-                getAux().setSiguiente(null);
+                aux.setSiguiente(null);
             }
+            System.gc();
         }
     }
 
-    public void eliminarPrimero() {
+    public void eliminarInicio() {
         if (getInicio() != null) {
             if (getInicio().getSiguiente() == null) {
                 setInicio(null);
             } else {
                 setInicio(getInicio().getSiguiente());
             }
+            System.gc();
         }
     }
 
     public String getLista() {
         if (inicio != null) {
-            primero();
+            Nodo aux = getInicio();
             StringBuilder lista = new StringBuilder("Lista: ");
-            while (getAux() != null) {
-                lista.append(getAux().getInfo());
-                if (getAux().getSiguiente() != null)
+            while (aux != null) {
+                lista.append(aux.getInfo());
+                if (aux.getSiguiente() != null)
                     lista.append(", ");
-                siguiente();
+                aux = aux.getSiguiente();
             }
             return lista.toString();
         }
         return "Lista vaciá";
+    }
+
+    public int contarNodos() {
+        if (getInicio() != null) {
+            Nodo aux = getInicio();
+            int tamaño = 0;
+            while (aux != null) {
+                tamaño++;
+                aux = aux.getSiguiente();
+            }
+            return tamaño;
+        }
+        return 0;
+    }
+
+    public void buscarDato(int dato) {
+        if (getInicio() != null) {
+            Nodo aux = getInicio();
+            int posicion = 0;
+            while (aux != null) {
+                if (aux.getInfo() == dato) {
+                    System.out.println("El dato " + dato + " se encuentra en la posición " + posicion);
+                    return;
+                }
+                posicion++;
+                aux = aux.getSiguiente();
+            }
+            System.out.println("El dato " + dato + " no se encuentra en la lista");
+        }
     }
 }

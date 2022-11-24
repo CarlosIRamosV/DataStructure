@@ -18,6 +18,7 @@ public class Ventana {
     private JButton button1;
     private JButton eliminarUltimo;
     private JButton eliminarPrimeroButton;
+    private JLabel outSize;
 
     public Ventana() {
         lista = new TDAListas();
@@ -26,12 +27,12 @@ public class Ventana {
         eliminarUltimo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                lista.eliminarUltimo();
+                lista.eliminarFinal();
                 update();
             }
         });
         eliminarPrimeroButton.addActionListener(e -> {
-            lista.eliminarPrimero();
+            lista.eliminarInicio();
             update();
         });
     }
@@ -46,5 +47,6 @@ public class Ventana {
 
     public void update() {
         out.setText(lista.getLista());
+        outSize.setText("Tamaño: " + lista.contarNodos());
     }
 }
