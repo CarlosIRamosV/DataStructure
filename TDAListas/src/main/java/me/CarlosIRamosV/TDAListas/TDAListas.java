@@ -33,11 +33,23 @@ public class TDAListas implements TDAListasInterface {
         return inicio;
     }
 
-    public void insertar(int info) {
+    public void agregarInicio(int info) {
         if (getInicio() == null) {
             setInicio(new Nodo(info));
         } else {
             setInicio(new Nodo(info, getInicio()));
+        }
+    }
+
+    public void agregarFinal(int info) {
+        if (getInicio() == null) {
+            setInicio(new Nodo(info));
+        } else {
+            Nodo aux = getInicio();
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            aux.setSiguiente(new Nodo(info));
         }
     }
 

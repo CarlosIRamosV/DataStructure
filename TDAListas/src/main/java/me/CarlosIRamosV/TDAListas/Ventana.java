@@ -14,33 +14,45 @@ public class Ventana {
     TDAListas lista;
     public JPanel contentPanel;
     private JLabel out;
-    private JTextField input;
-    private JButton button1;
-    private JButton eliminarUltimo;
-    private JButton eliminarPrimeroButton;
+    private JTextField agregarInicioInput;
+    private JButton agregarInicioButton;
+    private JButton eliminarDelInicioButton;
+    private JButton agregarFinalButton;
     private JLabel outSize;
+    private JTextField agregarFinalInput;
+    private JButton eliminarDelFinalButton;
 
     public Ventana() {
         lista = new TDAListas();
-        input.addActionListener(insertar());
-        button1.addActionListener(insertar());
-        eliminarUltimo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                lista.eliminarFinal();
-                update();
-            }
-        });
-        eliminarPrimeroButton.addActionListener(e -> {
+
+        agregarInicioInput.addActionListener(agregarInicio());
+        agregarInicioButton.addActionListener(agregarInicio());
+        agregarFinalInput.addActionListener(agregarFinal());
+        agregarFinalButton.addActionListener(agregarFinal());
+
+        eliminarDelInicioButton.addActionListener(e -> {
             lista.eliminarInicio();
+            update();
+        });
+
+        eliminarDelFinalButton.addActionListener(e -> {
+            lista.eliminarFinal();
             update();
         });
     }
 
-    public ActionListener insertar() {
+    public ActionListener agregarInicio() {
         return e -> {
-            lista.insertar(Integer.parseInt(input.getText()));
-            input.setText("");
+            lista.agregarInicio(Integer.parseInt(agregarInicioInput.getText()));
+            agregarInicioInput.setText("");
+            update();
+        };
+    }
+
+    public ActionListener agregarFinal() {
+        return e -> {
+            lista.agregarFinal(Integer.parseInt(agregarFinalInput.getText()));
+            agregarFinalInput.setText("");
             update();
         };
     }
