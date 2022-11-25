@@ -7,5 +7,4 @@ public interface NodoInterface {
     int getInfo();
     void setSiguiente(Nodo siguiente);
     Nodo getSiguiente();
-
 }

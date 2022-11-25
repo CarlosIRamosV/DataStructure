@@ -5,8 +5,6 @@ import me.CarlosIRamosV.TDAListas.interfaces.NodoInterface;
 public class Nodo implements NodoInterface {
     private int info;
     private Nodo siguiente;
-    private int inicio ;
-    private int aux;
 
     public Nodo() {
         setInfo(0);
@@ -23,35 +21,23 @@ public class Nodo implements NodoInterface {
         setSiguiente(siguiente);
     }
 
-    public void setAux(int aux) {
-        this.aux = aux;
-    }
-
-    public void setInicio(int inicio) {
-        this.inicio = inicio;
-    }
-
-    public void setInfo(int info) {
-        this.info = info;
-    }
-
-    public void setSiguiente(Nodo siguiente) {
-        this.siguiente = siguiente;
-    }
-
-    public int getAux() {
-        return aux;
-    }
-
+    @Override
     public int getInfo() {
         return info;
     }
 
+    @Override
+    public void setInfo(int info) {
+        this.info = info;
+    }
+
+    @Override
     public Nodo getSiguiente() {
         return siguiente;
     }
 
-    public int getInicio() {
-        return inicio;
+    @Override
+    public void setSiguiente(Nodo siguiente) {
+        this.siguiente = siguiente;
     }
 }

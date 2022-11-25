@@ -1,5 +1,7 @@
 package me.CarlosIRamosV.TDAListas.interfaces;
 
+import me.CarlosIRamosV.TDAListas.Nodo;
+
 /**
  * Interfaz que define los métodos que debe implementar el TDAListas
  *
@@ -7,6 +9,14 @@ package me.CarlosIRamosV.TDAListas.interfaces;
  * @version 1.0
  */
 public interface TDAListasInterface {
-
+    void setInicio(Nodo inicio);
+    Nodo getInicio();
+    void agregarInicio(int info);
+    void agregarFinal(int info);
+    void eliminarFinal();
+    void eliminarInicio();
+    String getLista();
+    int contarNodos();
+    void buscar(int info);
 }
 

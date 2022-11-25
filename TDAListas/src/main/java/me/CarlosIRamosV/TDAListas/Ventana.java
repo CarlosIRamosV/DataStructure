@@ -1,7 +1,6 @@
 package me.CarlosIRamosV.TDAListas;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -11,8 +10,8 @@ import java.awt.event.ActionListener;
  * @version 1.0
  */
 public class Ventana {
-    TDAListas lista;
     public JPanel contentPanel;
+    TDAListas lista;
     private JLabel out;
     private JTextField agregarInicioInput;
     private JButton agregarInicioButton;

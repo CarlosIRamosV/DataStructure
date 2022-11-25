@@ -25,14 +25,17 @@ public class TDAListas implements TDAListasInterface {
         setInicio(inicio);
     }
 
-    public void setInicio(Nodo inicio) {
-        this.inicio = inicio;
-    }
-
+    @Override
     public Nodo getInicio() {
         return inicio;
     }
 
+    @Override
+    public void setInicio(Nodo inicio) {
+        this.inicio = inicio;
+    }
+
+    @Override
     public void agregarInicio(int info) {
         if (getInicio() == null) {
             setInicio(new Nodo(info));
@@ -41,6 +44,7 @@ public class TDAListas implements TDAListasInterface {
         }
     }
 
+    @Override
     public void agregarFinal(int info) {
         if (getInicio() == null) {
             setInicio(new Nodo(info));
@@ -53,6 +57,7 @@ public class TDAListas implements TDAListasInterface {
         }
     }
 
+    @Override
     public void eliminarFinal() {
         if (getInicio() != null) {
             if (getInicio().getSiguiente() == null) {
@@ -68,6 +73,7 @@ public class TDAListas implements TDAListasInterface {
         }
     }
 
+    @Override
     public void eliminarInicio() {
         if (getInicio() != null) {
             if (getInicio().getSiguiente() == null) {
@@ -79,6 +85,7 @@ public class TDAListas implements TDAListasInterface {
         }
     }
 
+    @Override
     public String getLista() {
         if (inicio != null) {
             Nodo aux = getInicio();
@@ -94,6 +101,7 @@ public class TDAListas implements TDAListasInterface {
         return "Lista vaciá";
     }
 
+    @Override
     public int contarNodos() {
         if (getInicio() != null) {
             Nodo aux = getInicio();
@@ -107,7 +115,8 @@ public class TDAListas implements TDAListasInterface {
         return 0;
     }
 
-    public void buscarDato(int dato) {
+    @Override
+    public void buscar(int dato) {
         if (getInicio() != null) {
             Nodo aux = getInicio();
             int posicion = 0;
