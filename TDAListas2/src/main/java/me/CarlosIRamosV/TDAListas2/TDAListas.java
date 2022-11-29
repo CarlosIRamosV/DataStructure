@@ -104,6 +104,24 @@ public class TDAListas implements TDAListasInterface {
         return "Lista vaciá";
     }
 
+    public String getElementosInvertido() {
+        if (inicio != null) {
+            Nodo aux = getInicio();
+            StringBuilder lista = new StringBuilder("Lista: ");
+            while (aux.getSiguiente() != null) {
+                aux = aux.getSiguiente();
+            }
+            while (aux != null) {
+                lista.append(aux.getInfo());
+                if (aux.getAnterior() != null)
+                    lista.append(", ");
+                aux = aux.getAnterior();
+            }
+            return lista.toString();
+        }
+        return "Lista vaciá";
+    }
+
     @Override
     public int contarNodos() {
         if (getInicio() != null) {

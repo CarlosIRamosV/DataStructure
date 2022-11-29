@@ -57,7 +57,7 @@ public class Ventana {
     }
 
     public void update() {
-        out.setText(lista.getLista());
+        out.setText(lista.getElementosInvertido());
         outSize.setText("Tamaño: " + lista.contarNodos());
     }
 }
